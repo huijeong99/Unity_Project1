@@ -11,7 +11,7 @@ public class EnemyManager : MonoBehaviour
 
     public GameObject enemyFactory;
     //public GameObject spawnPoint[5];
-    public GameObject spawnPoint;
+    public GameObject[] spawnPoint;
     float spawnTime=1.0f;    //스폰타임
     float curTime=0.0f;      //
 
@@ -30,6 +30,10 @@ public class EnemyManager : MonoBehaviour
 
         if (curTime > spawnTime)
         {
+            //누적시간 초기화
+            curTime = 0.0f;
+            //해당 시간의 순서를 뒤로 미룰 경우 오류가 발생함
+
             //스폰타임을 랜덤으로
             spawnTime = Random.Range(0.5f, 2.0f);
             
@@ -37,12 +41,9 @@ public class EnemyManager : MonoBehaviour
             GameObject enemy = Instantiate(enemyFactory);
 
             //에너미 생성 위치 조정
-             enemy.transform.position = spawnPoint.transform.position;
-            int index = Random.Range(0, 5);//SpawnPoints.lenghs
-            //enemy.transform.position = spawnPoint[index].transform.position;
-
-            //누적시간 초기화
-            curTime = 0.0f;
+            // enemy.transform.position = spawnPoint.transform.position;
+            int index = Random.Range(0, spawnPoint.Length);//SpawnPoints.lenghs
+            enemy.transform.position = spawnPoint[index].transform.position;
         }
     }
 }
