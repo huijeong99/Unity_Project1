@@ -615,7 +615,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 884358346}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1060927039}
@@ -716,7 +716,6 @@ GameObject:
   - component: {fileID: 1060927038}
   - component: {fileID: 1060927037}
   - component: {fileID: 1060927036}
-  - component: {fileID: 1060927035}
   m_Layer: 12
   m_Name: Boss
   m_TagString: Boss
@@ -724,25 +723,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1060927035
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1060927034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6a9a02267d07d64d91533e7eed2e49b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FirePos: {fileID: 884358346}
-  bulletFactory: {fileID: 2262517869788609078, guid: 24a0171150c1a2f44a3ec70cbbfaf029,
-    type: 3}
-  Player: {fileID: 2116779477}
-  FireTime: 1
-  CurrentTime: 0
-  FireTime1: 1.5
 --- !u!65 &1060927036
 BoxCollider:
   m_ObjectHideFlags: 0
