@@ -26,6 +26,9 @@ public class Enemy : MonoBehaviour
         Destroy(collision.gameObject);//충돌체의 게임 오브젝트를 없앰
 
         ShowEffect();
+
+        //점수추가
+        ScoreManager.Instance.AddScore();
     }
 
     void ShowEffect()
