@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     //충돌처리(에너미<>플레이어/에너미<>플레이어 총알
 
     public float speed = 10.0f;
+    public GameObject fxFactory;
 
     // Update is called once per frame
     void Update()
@@ -23,5 +24,13 @@ public class Enemy : MonoBehaviour
         //Destroy(gameObject,1.0f);//1초 뒤에 없앤다는 의미 
         Destroy(gameObject);//소문자 gameObject는 자기 자신
         Destroy(collision.gameObject);//충돌체의 게임 오브젝트를 없앰
+
+        ShowEffect();
+    }
+
+    void ShowEffect()
+    {
+        GameObject fx = Instantiate(fxFactory);
+        fx.transform.position = transform.position;
     }
 }
