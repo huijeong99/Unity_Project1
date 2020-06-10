@@ -19,6 +19,8 @@ public class PlayerFire : MonoBehaviour
     //사운드 재생
     AudioSource audio;
 
+    bool layerOn = false;
+
 
     //오브젝트 풀링
     //오브젝트 풀링에 사용할 최대 총알갯수
@@ -82,8 +84,11 @@ public class PlayerFire : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Fire();
-        //FireRay();
+
+        if (layerOn == false)
+            Fire();
+        else
+            FireRay();
         //레이져 보여주는 기능이 활성화 되어 있을때만
         //레이져를 보여준다
         //일정시간이 지나면 레이져 보여주는 기능 비활성화
@@ -222,14 +227,21 @@ public class PlayerFire : MonoBehaviour
     }
 
     //파이어버튼 클릭시
-    public void OnFireButtonClick()
-    {
-        //총알 게임오브젝트 생성
-        GameObject bullet = Instantiate(bulletFactory);
-        //총알 오브젝트의 위치 지정
-        //bullet.transform.position = transform.position;
-        bullet.transform.position = firePoint.transform.position;
+    //public void OnFireButtonClick()
+    //{
+    //    //총알 게임오브젝트 생성
+    //    GameObject bullet = Instantiate(bulletFactory);
+    //    //총알 오브젝트의 위치 지정
+    //    //bullet.transform.position = transform.position;
+    //    bullet.transform.position = firePoint.transform.position;
+    //
+    //    //SceneMgr.Instance.LoadScene("StartScene");
+    //}
 
-        //SceneMgr.Instance.LoadScene("StartScene");
+    //레이어 전환 스위치
+    public void SwitchLayer()
+    {
+        if (layerOn == true) layerOn = false;
+        else layerOn = true;
     }
 }
