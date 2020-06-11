@@ -13,7 +13,7 @@ public class PlayerFire : MonoBehaviour
     LineRenderer lr;    //라인렌더러 컴포넌트
 
     //일정시간동안만 레이져 보여주기
-    public float rayTime = 0.3f;
+    public float rayTime = 0.1f;
     float timer = 0.0f;
 
     //사운드 재생
@@ -50,6 +50,11 @@ public class PlayerFire : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+        if (lr.enabled) ShowRay();
+    }
+
     //오브젝트 풀링 초기화
     private void InitObjectPooling()
     {
@@ -81,22 +86,22 @@ public class PlayerFire : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void setFire()
     {
-
         if (layerOn == false)
             Fire();
         else
+        {
             FireRay();
-        //레이져 보여주는 기능이 활성화 되어 있을때만
-        //레이져를 보여준다
-        //일정시간이 지나면 레이져 보여주는 기능 비활성화
-        if (lr.enabled) ShowRay();
+            //레이져 보여주는 기능이 활성화 되어 있을때만
+            //레이져를 보여준다
+            //일정시간이 지나면 레이져 보여주는 기능 비활성화
+        }
     }
 
     private void ShowRay()
     {
+        //일정시간동안만 레이저 보여주기
         timer += Time.deltaTime;
         if (timer > rayTime)
         {
@@ -108,121 +113,111 @@ public class PlayerFire : MonoBehaviour
     //총알발사
     public void Fire()
     {
-        //마우스왼쪽버튼 or 왼쪽컨트롤 키
-        if (Input.GetButton("Fire1"))
+
+        //1. 배열 오브젝트풀링으로 총알발사
+        //bulletPool[fireIndex].SetActive(true);
+        //bulletPool[fireIndex].transform.position = firePoint.transform.position;
+        //bulletPool[fireIndex].transform.up = firePoint.transform.up;
+        //fireIndex++;
+        //if (fireIndex >= poolSize) fireIndex = 0;
+
+        //2. 리스트 오브젝트풀링으로 총알발사         
+        //bulletPool[fireIndex].SetActive(true);
+        //bulletPool[fireIndex].transform.position = firePoint.transform.position;
+        //bulletPool[fireIndex].transform.up = firePoint.transform.up;
+        //fireIndex++;
+        //if (fireIndex >= poolSize) fireIndex = 0;
+
+
+        //3. 리스트 오브젝트풀링으로 총알발사 (진짜 오브젝트 풀링)
+        //if(bulletPool.Count > 0)
+        //{
+        //    GameObject bullet = bulletPool[0];
+        //    bullet.SetActive(true);
+        //    bullet.transform.position = firePoint.transform.position;
+        //    bullet.transform.up = firePoint.transform.up;
+        //    //오브젝트 풀에서 빼준다
+        //    bulletPool.Remove(bullet);
+        //}
+        //else//오브젝트 풀이 비어서 총알이 하나도 없으니 풀크기를 늘려준다
+        //{
+        //    GameObject bullet = Instantiate(bulletFactory);
+        //    bullet.SetActive(false);
+        //    //오브젝트 풀에 추가한다
+        //    bulletPool.Add(bullet);
+        //}
+
+        //4. 큐 오브젝트풀링 사용하기
+        if (bulletPool.Count > 0)
         {
-            //1. 배열 오브젝트풀링으로 총알발사
-            //bulletPool[fireIndex].SetActive(true);
-            //bulletPool[fireIndex].transform.position = firePoint.transform.position;
-            //bulletPool[fireIndex].transform.up = firePoint.transform.up;
-            //fireIndex++;
-            //if (fireIndex >= poolSize) fireIndex = 0;
-
-            //2. 리스트 오브젝트풀링으로 총알발사         
-            //bulletPool[fireIndex].SetActive(true);
-            //bulletPool[fireIndex].transform.position = firePoint.transform.position;
-            //bulletPool[fireIndex].transform.up = firePoint.transform.up;
-            //fireIndex++;
-            //if (fireIndex >= poolSize) fireIndex = 0;
-
-
-            //3. 리스트 오브젝트풀링으로 총알발사 (진짜 오브젝트 풀링)
-            //if(bulletPool.Count > 0)
-            //{
-            //    GameObject bullet = bulletPool[0];
-            //    bullet.SetActive(true);
-            //    bullet.transform.position = firePoint.transform.position;
-            //    bullet.transform.up = firePoint.transform.up;
-            //    //오브젝트 풀에서 빼준다
-            //    bulletPool.Remove(bullet);
-            //}
-            //else//오브젝트 풀이 비어서 총알이 하나도 없으니 풀크기를 늘려준다
-            //{
-            //    GameObject bullet = Instantiate(bulletFactory);
-            //    bullet.SetActive(false);
-            //    //오브젝트 풀에 추가한다
-            //    bulletPool.Add(bullet);
-            //}
-
-            //4. 큐 오브젝트풀링 사용하기
-            if (bulletPool.Count > 0)
-            {
-                GameObject bullet = bulletPool.Dequeue();
-                bullet.SetActive(true);
-                bullet.transform.position = firePoint.transform.position;
-                bullet.transform.up = firePoint.transform.up;
-            }
-            else
-            {
-                //총알 오브젝트 생성한다
-                GameObject bullet = Instantiate(bulletFactory);
-                bullet.SetActive(false);
-                //생성된 총알 오브젝트를 풀에 담는다
-                bulletPool.Enqueue(bullet);
-            }
-
-
-
-
-            //총알공장(총알프리팹)에서 총알을 무한대로 찍어낼 수 있다
-            //Instantiate() 함수로 프리팹 파일을 게임오브젝트로 만든다
-
-            //총알 게임오브젝트 생성
-            //GameObject bullet = Instantiate(bulletFactory);
-            //총알 오브젝트의 위치 지정
-            //bullet.transform.position = transform.position;
-            //bullet.transform.position = firePoint.transform.position;
+            GameObject bullet = bulletPool.Dequeue();
+            bullet.SetActive(true);
+            bullet.transform.position = firePoint.transform.position;
+            bullet.transform.up = firePoint.transform.up;
         }
+        else
+        {
+            //총알 오브젝트 생성한다
+            GameObject bullet = Instantiate(bulletFactory);
+            bullet.SetActive(false);
+            //생성된 총알 오브젝트를 풀에 담는다
+            bulletPool.Enqueue(bullet);
+        }
+
+        //총알공장(총알프리팹)에서 총알을 무한대로 찍어낼 수 있다
+        //Instantiate() 함수로 프리팹 파일을 게임오브젝트로 만든다
+
+        //총알 게임오브젝트 생성
+        //GameObject bullet = Instantiate(bulletFactory);
+        //총알 오브젝트의 위치 지정
+        //bullet.transform.position = transform.position;
+        //bullet.transform.position = firePoint.transform.position;
     }
 
     //레이져발사
     public void FireRay()
     {
-        //마우스왼쪽버튼 or 왼쪽컨트롤 키
-        if (Input.GetButtonDown("Fire1"))
+
+        //레이져 사운드 재생
+        audio.Play();
+
+        //라인렌더러 컴포넌트 활성화
+        lr.enabled = true;
+        //라인 시작점, 끝점
+        lr.SetPosition(0, transform.position);
+        //lr.SetPosition(1, transform.position + Vector3.up * 10);
+        //라인의 끝점은 충돌된 지점으로 변경한다
+
+        //Ray로 충돌처리
+        Ray ray = new Ray(transform.position, Vector3.up);
+        RaycastHit hitInfo; //Ray와 충돌된 오브젝트의 정보를 담는다
+                            //Ray랑 충돌된 오브젝트가 있다
+        if (Physics.Raycast(ray, out hitInfo))
         {
-            //레이져 사운드 재생
-            audio.Play();
+            //레이져의 끝점 지정
+            lr.SetPosition(1, hitInfo.point);
+            //충돌된 오브젝트 모두 지우기
+            //Destroy(hitInfo.collider.gameObject);
 
-            //라인렌더러 컴포넌트 활성화
-            lr.enabled = true;
-            //라인 시작점, 끝점
-            lr.SetPosition(0, transform.position);
-            //lr.SetPosition(1, transform.position + Vector3.up * 10);
-            //라인의 끝점은 충돌된 지점으로 변경한다
-
-            //Ray로 충돌처리
-            Ray ray = new Ray(transform.position, Vector3.up);
-            RaycastHit hitInfo; //Ray와 충돌된 오브젝트의 정보를 담는다
-            //Ray랑 충돌된 오브젝트가 있다
-            if (Physics.Raycast(ray, out hitInfo))
+            //디스트로이존의 탑과는 충돌처리 되지 않도록 한다
+            if (hitInfo.collider.name != "Top")
             {
-                //레이져의 끝점 지정
-                lr.SetPosition(1, hitInfo.point);
-                //충돌된 오브젝트 모두 지우기
-                //Destroy(hitInfo.collider.gameObject);
-
-                //디스트로이존의 탑과는 충돌처리 되지 않도록 한다
-                if (hitInfo.collider.name != "Top")
-                {
-                    Destroy(hitInfo.collider.gameObject);
-                }
-
-                //충돌된 에너미 오브젝트 삭제
-                //프리팹으로 만든 오브젝트 같은경우는 생성될때 클론으로 생성된다
-                //Contains("Enemy") => Enemy(clone) 이런것도 포함함
-                //if (hitInfo.collider.name.Contains("Enemy"))
-                //{
-                //    Destroy(hitInfo.collider.gameObject);
-                //}
-
-            }
-            else
-            {
-                //충돌된 오브젝트가 없으니 끝점을 정해준다
-                lr.SetPosition(1, transform.position + Vector3.up * 10);
+                Destroy(hitInfo.collider.gameObject);
             }
 
+            //충돌된 에너미 오브젝트 삭제
+            //프리팹으로 만든 오브젝트 같은경우는 생성될때 클론으로 생성된다
+            //Contains("Enemy") => Enemy(clone) 이런것도 포함함
+            //if (hitInfo.collider.name.Contains("Enemy"))
+            //{
+            //    Destroy(hitInfo.collider.gameObject);
+            //}
+
+        }
+        else
+        {
+            //충돌된 오브젝트가 없으니 끝점을 정해준다
+            lr.SetPosition(1, transform.position + Vector3.up * 10);
         }
     }
 
