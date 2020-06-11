@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;            //텍스트메시프로 사용
+using System;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -17,9 +18,15 @@ public class ScoreManager : MonoBehaviour
     int score = 0;
     int highScore = 0;
 
+    //스테이지 넘기기용
+    public GameObject enemy;    //에너미 매니저 넣는곳
+    public GameObject boss;     //보스 넣는 곳
+
     // Start is called before the first frame update
     void Start()
     {
+        //스코어 표시하기
+        scoreTxt.text = "Score : " + score;
         //하이스코어 불러오기
         highScore = PlayerPrefs.GetInt("HighScore");
         highScoreTxt.text = "HighScore : " + highScore;
@@ -30,6 +37,13 @@ public class ScoreManager : MonoBehaviour
     {
         //하이스코어
         SaveHighScore();
+
+        //보스 출현
+        //적 개체 50마리 잡을때마다 생성
+        if (score>0&& score % 10== 0)
+        {
+            SetBoss();
+        }
     }
 
     private void SaveHighScore()
@@ -50,5 +64,11 @@ public class ScoreManager : MonoBehaviour
 
         //텍스트메시 프로는 안됨
       //  textTxt.text = "test : " + score;
+    }
+
+    private void SetBoss()
+    {
+        enemy.SetActive(false);
+        boss.SetActive(true);
     }
 }

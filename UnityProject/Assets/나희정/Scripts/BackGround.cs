@@ -5,7 +5,7 @@ using UnityEngine;
 public class BackGround : MonoBehaviour
 {
     //private Renderer bMaterial;
-    public float speed = 0.5f;
+    public float speed;
     //public Vector2 offSet = new Vector2(0, 0);
 
     Material mat;
@@ -16,8 +16,9 @@ public class BackGround : MonoBehaviour
 
         //mat = GetComponent<Renderer>().material;
         //== 
+        speed = 0.2f;
         mat = GetComponent<MeshRenderer>().material;
-
+      
     }
 
     // Update is called once per frame
