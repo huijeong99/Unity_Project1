@@ -21,6 +21,8 @@ public class PlayerFire : MonoBehaviour
 
     bool layerOn = false;
 
+    //이펙트
+    public ParticleSystem fireEffect;
 
     //오브젝트 풀링
     //오브젝트 풀링에 사용할 최대 총알갯수
@@ -89,7 +91,9 @@ public class PlayerFire : MonoBehaviour
     public void setFire()
     {
         if (layerOn == false)
+        {
             Fire();
+        }
         else
         {
             FireRay();
@@ -164,6 +168,7 @@ public class PlayerFire : MonoBehaviour
             bulletPool.Enqueue(bullet);
         }
 
+        fireEffect.Play(true);
         //총알공장(총알프리팹)에서 총알을 무한대로 찍어낼 수 있다
         //Instantiate() 함수로 프리팹 파일을 게임오브젝트로 만든다
 

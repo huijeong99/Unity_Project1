@@ -7,6 +7,10 @@ using System;
 
 public class ScoreManager : MonoBehaviour
 {
+    //디스트로이존 받아오기
+    DestroyZone destroyZone = new DestroyZone();
+    public int intoNextLevel = 10;//다음 스테이지로 넘어가기 위해 필요한 적 수
+
     //스코어매니져 싱글톤 만들기
     public static ScoreManager Instance;
     private void Awake() => Instance = this;
@@ -38,9 +42,7 @@ public class ScoreManager : MonoBehaviour
         //하이스코어
         SaveHighScore();
 
-        //보스 출현
-        //적 개체 50마리 잡을때마다 생성
-        if (score>0&& score % 10== 0)
+        if (destroyZone.getPassedEnemy() + score >= intoNextLevel)
         {
             SetBoss();
         }
@@ -60,13 +62,14 @@ public class ScoreManager : MonoBehaviour
     public void AddScore()
     {
         score++;
-        scoreTxt.text = "Score : " + score;
+        //scoreTxt.text = "Score : " + score;
+        scoreTxt.text = "Score : " + destroyZone.getPassedEnemy();
 
         //텍스트메시 프로는 안됨
       //  textTxt.text = "test : " + score;
     }
-
-    private void SetBoss()
+   
+    public void SetBoss()
     {
         enemy.SetActive(false);
         boss.SetActive(true);

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DestroyZone : MonoBehaviour
 {
+    private int passedEnemy = 0;
+
     //트리거 감지 후 해당 오브젝트 삭제
     private void OnTriggerEnter(Collider other)
     {
@@ -33,5 +35,16 @@ public class DestroyZone : MonoBehaviour
             PlayerFire pf = GameObject.Find("Player").GetComponent<PlayerFire>();
             pf.bulletPool.Enqueue(other.gameObject);
         }
+
+        if (other.gameObject.name.Contains("Enemy"))
+        {
+            passedEnemy++;
+            Destroy(other.gameObject);
+        }
+    }
+
+    public int getPassedEnemy()
+    {
+        return passedEnemy;
     }
 }

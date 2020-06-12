@@ -16,7 +16,7 @@ public class BackGround : MonoBehaviour
 
         //mat = GetComponent<Renderer>().material;
         //== 
-        speed = 0.2f;
+        speed = 0.1f;
         mat = GetComponent<MeshRenderer>().material;
       
     }
