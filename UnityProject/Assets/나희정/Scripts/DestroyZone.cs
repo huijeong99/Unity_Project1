@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DestroyZone : MonoBehaviour
 {
-    private int passedEnemy = 0;
+    public int passedEnemy = 0;
 
     //트리거 감지 후 해당 오브젝트 삭제
     private void OnTriggerEnter(Collider other)
@@ -27,7 +27,7 @@ public class DestroyZone : MonoBehaviour
         //}
 
         //충돌된 오브젝트가 총알이라면 총알풀에 추가한다
-        if (other.gameObject.name.Contains("Bullet"))
+        if (other.gameObject.tag.Contains("Bullet"))
         {
             //총알 오브젝트는 비활성화 시킨다
             other.gameObject.SetActive(false);
@@ -36,15 +36,11 @@ public class DestroyZone : MonoBehaviour
             pf.bulletPool.Enqueue(other.gameObject);
         }
 
-        if (other.gameObject.name.Contains("Enemy"))
+        //이거안됨
+        if (other.gameObject.tag.Contains("Enemy"))
         {
-            passedEnemy++;
+            passedEnemy = passedEnemy + 1;
             Destroy(other.gameObject);
         }
-    }
-
-    public int getPassedEnemy()
-    {
-        return passedEnemy;
     }
 }

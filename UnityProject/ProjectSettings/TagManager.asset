@@ -15,6 +15,8 @@ TagManager:
   - PlayerRay
   - Rocket
   - Bullet
+  - DestroyZone
+  - Boss
   layers:
   - Default
   - TransparentFX
@@ -26,9 +28,9 @@ TagManager:
   - 
   - Player
   - Enemy
-  - Bullet
+  - PBullet
   - Effect
-  - 
+  - EBullet
   - 
   - 
   - 

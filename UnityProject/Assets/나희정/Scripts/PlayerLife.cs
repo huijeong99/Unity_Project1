@@ -24,6 +24,11 @@ public class PlayerLife : MonoBehaviour
         life = num;
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        
+    }
+
     // Update is called once per frame
     public void showLife()
     {

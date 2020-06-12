@@ -7,8 +7,6 @@ using System;
 
 public class ScoreManager : MonoBehaviour
 {
-    //디스트로이존 받아오기
-    DestroyZone destroyZone = new DestroyZone();
     public int intoNextLevel = 10;//다음 스테이지로 넘어가기 위해 필요한 적 수
 
     //스코어매니져 싱글톤 만들기
@@ -25,7 +23,7 @@ public class ScoreManager : MonoBehaviour
     //스테이지 넘기기용
     public GameObject enemy;    //에너미 매니저 넣는곳
     public GameObject boss;     //보스 넣는 곳
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -42,7 +40,7 @@ public class ScoreManager : MonoBehaviour
         //하이스코어
         SaveHighScore();
 
-        if (destroyZone.getPassedEnemy() + score >= intoNextLevel)
+        if (score >= intoNextLevel)
         {
             SetBoss();
         }
@@ -62,8 +60,7 @@ public class ScoreManager : MonoBehaviour
     public void AddScore()
     {
         score++;
-        //scoreTxt.text = "Score : " + score;
-        scoreTxt.text = "Score : " + destroyZone.getPassedEnemy();
+        scoreTxt.text = "Score : " + score;
 
         //텍스트메시 프로는 안됨
       //  textTxt.text = "test : " + score;
