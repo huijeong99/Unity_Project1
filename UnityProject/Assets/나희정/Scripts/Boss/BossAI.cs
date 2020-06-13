@@ -2,20 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class BossAI : MonoBehaviour
 {
     private float HP=100.0f;
     private float maxHP=100.0f;
     public Image hpBar;
+    public Text leftHP;
     public GameObject fxFactory;
     public GameObject crashFx;
 
     public GameObject gameClear;
 
+    private void Update()
+    {
+        if (gameObject.activeSelf==true&&gameObject.transform.position.y >= 5)
+        {
+            gameObject.transform.position += Vector3.down *1.0f* Time.deltaTime;
+        }
+
+        if (HP <= 50 && gameObject.transform.position.y >= 3)
+        {
+            gameObject.transform.position += Vector3.down * 1.0f * Time.deltaTime;
+        }
+
+    }
+
     private void OnCollisionEnter(Collision collision)//충돌검사시 사용하는 함수
     {
-        if (collision.gameObject.name.Contains("PBullet"))
+        if (collision.gameObject.tag.Contains("PBullet"))
         {
             HP -= 5.0f;   
             //Destroy(collision.gameObject);
@@ -75,5 +91,11 @@ public class BossAI : MonoBehaviour
     private void SetHPBar()
     {
         hpBar.fillAmount = HP / maxHP;
+        leftHP.text = HP + "/" + maxHP;
+    }
+
+    public void setHP(float damage)
+    {
+        HP -= damage;
     }
 }

@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerFire : MonoBehaviour
 {
+    BossAI bossAI = new BossAI();
+
     public GameObject bulletFactory;    //총알 프리팹
     public GameObject firePoint;         //총알 발사위치
 
@@ -205,9 +207,17 @@ public class PlayerFire : MonoBehaviour
             //Destroy(hitInfo.collider.gameObject);
 
             //디스트로이존의 탑과는 충돌처리 되지 않도록 한다
-            if (hitInfo.collider.name != "Top")
+            //접촉한 모든 개체의 남은 HP와 무관하게 모두 지운다
+            if (hitInfo.collider.name != "Top" && hitInfo.collider.name != "Boss")
             {
                 Destroy(hitInfo.collider.gameObject);
+                if (hitInfo.collider.name.Contains("Enemy")) { 
+                    ScoreManager.Instance.AddScore();
+            }
+            }
+            else if (hitInfo.collider.name == "Boss")
+            {
+                bossAI.setHP(7.0f);
             }
 
             //충돌된 에너미 오브젝트 삭제

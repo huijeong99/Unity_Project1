@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BossBulletFire : MonoBehaviour
 {
+    float readyTimer = 0.0f;
+
     public GameObject FirePos;       //발사 위치
     public GameObject bulletFactoryA;        //발사하는 총알
     public GameObject bulletFactoryB;        //발사하는 총알
@@ -19,11 +21,13 @@ public class BossBulletFire : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        readyTimer += 0.2f*Time.deltaTime;
 
-        AutoFire1();
-        AutoFire2();
-
-      
+        if (readyTimer > 1.0f)
+        {
+            AutoFire1();
+            AutoFire2();
+        }
     }
 
     private void AutoFire1()

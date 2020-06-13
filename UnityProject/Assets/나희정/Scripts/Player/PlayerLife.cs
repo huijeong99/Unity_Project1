@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerLife : MonoBehaviour
 {
@@ -39,12 +40,18 @@ public class PlayerLife : MonoBehaviour
         if(!collision.gameObject.tag.Contains("PBullet")){
             life--;
             showLife();
-        }
+       }
     }
 
     // Update is called once per frame
     public void showLife()
     {
         leftLife.text = life + "X";
+    }
+
+    public void ReStart()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(1);
     }
 }
