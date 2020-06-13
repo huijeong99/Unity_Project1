@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 445023595}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: HPPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 775943998}
   - component: {fileID: 775943997}
   - component: {fileID: 775943996}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: HPBarFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 2003392706}
   - component: {fileID: 2003392705}
   - component: {fileID: 2003392704}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: HPBarBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -235,7 +235,7 @@ GameObject:
   - component: {fileID: 2019619083}
   - component: {fileID: 2019619082}
   - component: {fileID: 2019619081}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -336,7 +336,7 @@ GameObject:
   - component: {fileID: 6486746045649337939}
   - component: {fileID: 6486746045649337936}
   - component: {fileID: 6486746045649337935}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -395,7 +395,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpBar: {fileID: 775943996}
   speed: 5
-  fxFactory: {fileID: 1280240331523082, guid: 45ae5851ef2832044bba82850372d67b, type: 3}
+  fxFactory: {fileID: 8377061863343797616, guid: 03e0bd8927564d74090e108947be8e56,
+    type: 3}
   crashFx: {fileID: 1495817439842732, guid: 9abeea789432c024ba3fbf0cd8669087, type: 3}
 --- !u!54 &6486746045649337935
 Rigidbody:
@@ -423,6 +424,10 @@ PrefabInstance:
     - target: {fileID: 1633967218572118, guid: 82f253063d03bde448e79c0e1d58a78b, type: 3}
       propertyPath: m_Name
       value: PLayer Engine Effect
+      objectReference: {fileID: 0}
+    - target: {fileID: 1633967218572118, guid: 82f253063d03bde448e79c0e1d58a78b, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4399061653577500, guid: 82f253063d03bde448e79c0e1d58a78b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -500,19 +505,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1111672163892426, guid: 6647bc14b7f253f4aa7ed042ccbd8304, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1345612375749392, guid: 6647bc14b7f253f4aa7ed042ccbd8304, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1634422096775152, guid: 6647bc14b7f253f4aa7ed042ccbd8304, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1637917924625008, guid: 6647bc14b7f253f4aa7ed042ccbd8304, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1946970332979032, guid: 6647bc14b7f253f4aa7ed042ccbd8304, type: 3}
       propertyPath: m_Name
@@ -520,7 +525,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1946970332979032, guid: 6647bc14b7f253f4aa7ed042ccbd8304, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4331568703382362, guid: 6647bc14b7f253f4aa7ed042ccbd8304, type: 3}
       propertyPath: m_LocalPosition.x
