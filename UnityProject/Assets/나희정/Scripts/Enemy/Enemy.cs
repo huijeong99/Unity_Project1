@@ -35,8 +35,17 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)//충돌검사시 사용하는 함수
     {
-        if (collision.collider.tag.Contains("Bullet")){
-            HP -= 5.0f;    //나중에 플레이어 공격력 추가하기
+        if (collision.collider.name.Contains("PBullet")){
+            HP -= 5.0f;    
+            //Destroy(collision.gameObject);//충돌체의 게임 오브젝트를 없앰
+            collision.gameObject.SetActive(false);
+            //오브젝트풀에 추가만 해준다
+            PlayerFire pf = GameObject.Find("Player").GetComponent<PlayerFire>();
+            pf.bulletPool.Enqueue(collision.gameObject);
+        }
+        else if (collision.collider.name.Contains("MBullet"))
+        {
+            HP -= 3.0f;   
             Destroy(collision.gameObject);//충돌체의 게임 오브젝트를 없앰
         }
         else if(collision.collider.tag.Contains("Player"))

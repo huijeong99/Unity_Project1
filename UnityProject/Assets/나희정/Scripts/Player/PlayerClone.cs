@@ -10,7 +10,7 @@ public class PlayerClone : MonoBehaviour
 
     public GameObject clone;
     public GameObject bulletFactory;
-    public float fireTime = 3.0f;
+    public float fireTime = 0.5f;
     float curTime = 0.0f;
 
     // Start is called before the first frame update
